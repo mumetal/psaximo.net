@@ -1,0 +1,8 @@
+C:\Users\Kodex Zone\Source\Repos\psaximo.net\Psaximo.Net\Psaximo.Net\bin\Debug\Psaximo.Net.dll.config
+C:\Users\Kodex Zone\Source\Repos\psaximo.net\Psaximo.Net\Psaximo.Net\bin\Debug\Psaximo.Net.dll
+C:\Users\Kodex Zone\Source\Repos\psaximo.net\Psaximo.Net\Psaximo.Net\bin\Debug\Psaximo.Net.pdb
+C:\Users\Kodex Zone\Source\Repos\psaximo.net\Psaximo.Net\Psaximo.Net\obj\Debug\Psaximo.Net.csproj.CoreCompileInputs.cache
+C:\Users\Kodex Zone\Source\Repos\psaximo.net\Psaximo.Net\Psaximo.Net\obj\Debug\Psaximo.Net.dll
+C:\Users\Kodex Zone\Source\Repos\psaximo.net\Psaximo.Net\Psaximo.Net\obj\Debug\Psaximo.Net.pdb
+C:\Users\Kodex Zone\Source\Repos\psaximo.net\Psaximo.Net\Psaximo.Net\bin\Debug\x64\lz4X64.dll
+C:\Users\Kodex Zone\Source\Repos\psaximo.net\Psaximo.Net\Psaximo.Net\bin\Debug\x86\lz4X86.dll
