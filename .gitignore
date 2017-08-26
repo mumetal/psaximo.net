@@ -14,14 +14,14 @@
 
 # Build results
 #[Dd]ebug/
-#[Dd]ebugPublic/
+[Dd]ebugPublic/
 #[Rr]elease/
-#[Rr]eleases/
+[Rr]eleases/
 #x64/
 #x86/
-#bld/
+bld/
 #[Bb]in/
-#[Oo]bj/
+[Oo]bj/
 #[Ll]og/
 
 # Visual Studio 2015 cache/options directory

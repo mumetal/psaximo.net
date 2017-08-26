@@ -6,3 +6,4 @@ C:\Users\Kodex Zone\Source\Repos\psaximo.net\Psaximo.Net\Psaximo.Net\obj\Debug\P
 C:\Users\Kodex Zone\Source\Repos\psaximo.net\Psaximo.Net\Psaximo.Net\obj\Debug\Psaximo.Net.pdb
 C:\Users\Kodex Zone\Source\Repos\psaximo.net\Psaximo.Net\Psaximo.Net\bin\Debug\x64\lz4X64.dll
 C:\Users\Kodex Zone\Source\Repos\psaximo.net\Psaximo.Net\Psaximo.Net\bin\Debug\x86\lz4X86.dll
+C:\Users\Kodex Zone\Source\Repos\psaximo.net\Psaximo.Net\Psaximo.Net\obj\Debug\Psaximo.Net.csprojResolveAssemblyReference.cache
