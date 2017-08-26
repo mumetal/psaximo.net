@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using Psaximo.Net.Util.Enums;
+using FileFetchMode = Psaximo.Net.Util.XimEnum.FileFetchMode;
 using Psaximo.Net.Index.Directory;
 
 namespace Psaximo.Net.Document.Extraction
@@ -30,7 +30,7 @@ namespace Psaximo.Net.Document.Extraction
         internal FileInfo ValidFile { get;  }
         public bool WeakScan { get { return weakscan; } set { weakscan = value;} }
 
-        private XimPath() { XimDirectory ximNET = XimNETDirectory.Open("", false);
+        private XimPath() { XimRepository ximNET = NETDirectory.Open("", false);
            
         }
 

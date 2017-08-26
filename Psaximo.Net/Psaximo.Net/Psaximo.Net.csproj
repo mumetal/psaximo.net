@@ -231,6 +231,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analysis\DirectoryAnalyzer.cs" />
+    <Compile Include="Analysis\Filters.cs" />
+    <Compile Include="Analysis\StandardAnalyzer.cs" />
+    <Compile Include="Analysis\SyntaxAnalyzer.cs" />
     <Compile Include="Document\Extraction\ExtensionAttribute.cs" />
     <Compile Include="Document\Extraction\ExtensionHandler.cs" />
     <Compile Include="Document\Extraction\ExtensionManager.cs" />
@@ -238,7 +241,7 @@
     <Compile Include="Document\Extraction\IPath.cs" />
     <Compile Include="Document\Extraction\Parsers\DOMParser.cs" />
     <Compile Include="Document\Extraction\Parsers\EmailParser.cs" />
-    <Compile Include="Document\Extraction\Parsers\ExecutableParser.cs" />
+    <Compile Include="Document\Extraction\Parsers\ZipParser.cs" />
     <Compile Include="Document\Extraction\Parsers\ExtractionParser.cs" />
     <Compile Include="Document\Extraction\Parsers\MediaParser.cs" />
     <Compile Include="Document\Extraction\Parsers\PdfParser.cs" />
@@ -250,30 +253,49 @@
     <Compile Include="Document\Extraction\XimPath.cs" />
     <Compile Include="Document\IDocument.cs" />
     <Compile Include="Document\XimDocument.cs" />
-    <Compile Include="Index\Directory\XimDirectory.cs" />
-    <Compile Include="Index\Directory\XimFSDirectory.cs" />
-    <Compile Include="Index\Directory\XimNETDirectory.cs" />
-    <Compile Include="Index\Directory\XimREMDirectory.cs" />
-    <Compile Include="Util\Enums\DirectoryEnum.cs" />
-    <Compile Include="Util\Enums\FileEnums.cs" />
+    <Compile Include="Index\Directory\XimRepository.cs" />
+    <Compile Include="Index\Directory\FSDirectory.cs" />
+    <Compile Include="Index\Directory\NETDirectory.cs" />
+    <Compile Include="Index\Directory\REMDirectory.cs" />
+    <Compile Include="Index\IndexWriter.cs" />
+    <Compile Include="Query\Parser\BooleanParser.cs" />
+    <Compile Include="Query\Parser\FieldScopeParser.cs" />
+    <Compile Include="Query\Parser\FrequencyParser.cs" />
+    <Compile Include="Query\Parser\MultiTermParser.cs" />
+    <Compile Include="Query\Parser\PhraseParser.cs" />
+    <Compile Include="Query\Parser\ProximityParser.cs" />
+    <Compile Include="Query\Parser\QueryParser.cs" />
+    <Compile Include="Query\Parser\RegexParser.cs" />
+    <Compile Include="Query\Parser\KeyTermParser.cs" />
+    <Compile Include="Query\Parser\WildCardParser.cs" />
+    <Compile Include="Query\Query.cs" />
+    <Compile Include="Query\XimQuery.cs" />
+    <Compile Include="Util\Archive\Cache\RuntimeCache.cs" />
+    <Compile Include="Util\Archive\Corpus\CorpusResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CorpusResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Util\Archive\Corpus\TrieCorpus.cs" />
+    <Compile Include="Util\Archive\Corpus\XimCorpus.cs" />
+    <Compile Include="Util\Archive\Log\Logger.cs" />
+    <Compile Include="Util\Archive\Log\QueryLog\HistoryLogger.cs" />
+    <Compile Include="Util\Archive\Log\QueryLog\SuggestionLogger.cs" />
+    <Compile Include="Util\Archive\Log\ExceptionLogger.cs" />
+    <Compile Include="Util\Attributes\Documentable.cs" />
+    <Compile Include="Util\Compressors\LZ4Compressor.cs" />
+    <Compile Include="Util\XimEnum.cs" />
+    <Compile Include="Util\Exceptions\XimException.cs" />
     <Compile Include="Util\Exceptions\XimFileException.cs" />
     <Compile Include="Util\Exceptions\XimNotSupportedException.cs" />
-    <Compile Include="Util\Storage\Logs\ExceptionLogger.cs" />
-    <Compile Include="Util\Storage\Logs\Logger.cs" />
-    <Compile Include="Util\Storage\Logs\QueryLogs\QueryHistoryLogger.cs" />
-    <Compile Include="Util\Storage\Logs\QueryLogs\QuerySuggestLogger.cs" />
+    <Compile Include="Util\Extenders\StringExtensions.cs" />
     <Compile Include="XimConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Document\Extraction\Strippers\" />
-    <Folder Include="Query\Parser\" />
     <Folder Include="Search\Rank\" />
     <Folder Include="Search\Result\" />
-    <Folder Include="Util\Attributes\" />
-    <Folder Include="Util\Compressors\" />
-    <Folder Include="Util\Extenders\" />
-    <Folder Include="Util\Storage\Cache\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -291,6 +313,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Util\Archive\Corpus\CorpusResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CorpusResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -301,11 +329,9 @@
     <Error Condition="!Exists('..\packages\Fody.2.0.0\build\netstandard1.4\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.0.0\build\netstandard1.4\Fody.targets'))" />
     <Error Condition="!Exists('..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets'))" />
   </Target>
-  <Target 
-    AfterTargets="AfterBuild;NonWinFodyTarget"
-    Name="CleanReferenceCopyLocalPaths" >
-     <Delete Files="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
-</Target>
+  <Target AfterTargets="AfterBuild;NonWinFodyTarget" Name="CleanReferenceCopyLocalPaths">
+    <Delete Files="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
+  </Target>
   <Import Project="..\packages\Fody.2.0.0\build\netstandard1.4\Fody.targets" Condition="Exists('..\packages\Fody.2.0.0\build\netstandard1.4\Fody.targets')" />
   <Import Project="..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets')" />
 </Project>

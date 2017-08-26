@@ -1,5 +1,5 @@
 ﻿using System;
-using FileEnum = Psaximo.Net.Util.Enums.FileEnums;
+using FileEnum = Psaximo.Net.Util.XimEnum;
 
 namespace Psaximo.Net.Document.Extraction.Parsers
 {
@@ -22,9 +22,9 @@ namespace Psaximo.Net.Document.Extraction.Parsers
 
     internal abstract class ExtractionParser
     {
-
+        
         protected ExtractionParser() {
-
+            
         }
 
         protected internal abstract FileEnum.FileType FileType { get; set; }
